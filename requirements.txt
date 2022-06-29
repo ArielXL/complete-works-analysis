@@ -1,0 +1,6 @@
+matplotlib
+pandas
+scikit-learn
+spacy
+es-core-news-sm
+python==3.10.2
