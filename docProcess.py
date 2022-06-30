@@ -3,13 +3,12 @@ import csv
 from datetime import datetime
 from dataVector.docVector import DocumentVector
 
-'''    
-    Build for every document the vector
-'''
-
 
 def documents_vectorized(data_dir: str, csv_name: str, index: int, writer: int):
-    names=[]
+    '''    
+    Build for every document in data_dir the vector
+    '''
+    names = []
     print('Convirtiendo documentos en vectores....')
     for filename in os.listdir(data_dir):
         names.append(filename)
@@ -31,19 +30,17 @@ def documents_vectorized(data_dir: str, csv_name: str, index: int, writer: int):
         print(f"Culminando conversion de documento {file} a las {current}")
 
         index += 1
-    
+
     print()
 
-    return index,names
+    return index, names
 
 
-'''
-    Converting all data information into a vector
-'''
+def building_vectors(data_dir: str, csv_name: str = 'vector/set.csv', my_writer: str = 1):
+    ''' 
+        Converting all data information into a vector
 
-
-def building_vectors(data_dir: str, csv_name: str='vector/set.csv', my_writer: str=1):
-    ''' Starting the csv file, Columns:
+        Starting the csv file, Columns:
         ID, Writer(Int), Words Count,Words Length,Words Small,Words Different,Punctuation Marks
         Stopwords,Root Words,Nouns Phrases,Verbal Phrases,Noun Adj Phrases,Adj Noun Phrases
         Noun Verb Phrases
@@ -72,11 +69,12 @@ def building_vectors(data_dir: str, csv_name: str='vector/set.csv', my_writer: s
 
         if my_writer == folder:
             writ = 1
-        index,_ = documents_vectorized(folder, csv_name, index, writ)
+        index, _ = documents_vectorized(folder, csv_name, index, writ)
 
         now = datetime.now()
         current = now.strftime("%H:%M:%S")
         print(f"Finishing doc {folder} at {current}")
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     building_vectors('data')

@@ -18,7 +18,7 @@ def main():
         while True:
             print('Calcular Similitud con Estilo Martiano:')
             data = int(input(
-                '  1. Con Datos de Entrenamiento.\n  2. Con Texto Introducido.\n'))
+                '  1. Con Datos de Entrenamiento.\n  2. Con Ruta de Carpeta con Textos a Analizar.\n'))
             if data != 1 and data != 2:
                 print('\n!!! ENTRADA INCORRECTA !!!\n')
             else:
@@ -50,23 +50,23 @@ def main():
 
         else:
             while True:
-                text=input('Introducir Texto a Comparar:\n')
-                if text:
+                rute=input('Introducir Ruta de Textos a Analizar:\n')
+                if rute:
                     print()
                     break
 
             if alg == 1:
-                y_pred, measures = slui(text)
-                print_result_with_input(y_pred, measures)
+                names,_,y_pred, measures = slui(rute)
+                print_result_with_input(names,y_pred, measures)
 
             elif alg == 2:
-                y_pred, measures = nslui(text)
-                print_result_with_input(y_pred, measures)
+                names,_,y_pred, measures = nslui(rute)
+                print_result_with_input(names,y_pred, measures)
 
             else:
-                y_pred1, measures1 = slui(text)
-                y_pred2, measures2 = nslui(text)
-                print_result_with_input(y_pred1, measures1, y_pred2, measures2)
+                names,_,y_pred, measures = slui(rute)
+                names,_,y_pred, measures = nslui(rute)
+                print_result_with_input(names,y_pred1, measures1, y_pred2, measures2)
 
 
 if __name__ == "__main__":
