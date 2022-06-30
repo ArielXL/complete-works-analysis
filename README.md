@@ -19,6 +19,7 @@ Para poder hacer uso del código, se requieren de varias dependencias. En `requi
 ```
 
 
+
 Para correr el programa, ubicarse en la ruta de la carpeta y escribir el comando:
 ````
     python3 main.py
@@ -40,7 +41,7 @@ Una vez que se haya ejecutado el comando para correr el programa, se mostrarán 
 
 1- Hacer uso de los documentos de test ubicados en la carpeta `testData`. Si se desea incorporar algún otro documento se recomienda, que si se conoce de antemano el autor, se ubique en la carpeta correspondiente (si es de Martí en la carpeta `testData/marti` de lo contrario en `testData/otros`)  para poder así evaluar el algoritmo. En caso que no se conozca el escritor ubicar en cualquiera de las dos carpetas y basar el resultado en la predicción obtenida.
 
-2- El texto a procesar sea introducido directamente en la consola.
+2- Introducir el nombre de la ruta (respectiva a la carpeta del proyecto) donde se encuentran los textos que se desean procesar.
 
 
 
