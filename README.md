@@ -1,13 +1,5 @@
 ### Trabajo de Reconocimiento de Estilos Literarios y Evaluación de Similitud con respecto a Escritos Martianos.
 
-## Autores
-
-| **Nombre(s) y Apellidos** |            **Correo**            | **Grupo** |
-| :-----------------------: | :------------------------------: | :-------: |
-|  Thalia Blanco Figueras   |      lia.blanco98@gmail.com      |   C-512   |
-|    Eziel C. Ramos Piñón   |     ezielramos498@gmail.com      |   C-511   |
-|   Ariel Plasencia Díaz    |    arielplasencia00@gmail.com    |   C-512   |
-
 El trabajo se propone predecir a partir un texto de entrada, su similitud, en cuanto al estilo, con el estilo empleado por Martí. Para ello se entrena con una serie de documentos escritos por José Martí y con documentos llevados a cabo por otros escritores. La evaluación de similitud se logra con el uso de algoritmos de Inteligencia Artificial, tanto de aprendizaje supervisado (`Naive Bayes`) como de no supervisado (`KMEANS`).
 
 #### Requerimientos para ejecutar el código
@@ -17,7 +9,6 @@ Para poder hacer uso del código, se requieren de varias dependencias. En `requi
 ```
     pip install -r requirements.txt
 ```
-
 
 
 Para correr el programa, ubicarse en la ruta de la carpeta y escribir el comando:

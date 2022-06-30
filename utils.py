@@ -102,6 +102,8 @@ def print_no_supervised_metrics(y_pred: list, result: dict):
     '''
     print(f'V-Medida: {v_measure}.\n')
 
+    
+
 
 def print_supervised_metrics(y_pred: list, result: dict):
     name = result['name']
@@ -136,18 +138,18 @@ def print_result_with_input(names, y_pred_1: list, measures_1: dict, y_pred_2: l
 
         print()
 
-    if measures_1['supervised']:
-        print_supervised_metrics(y_pred_1, measures_1)
-    else:
-        print_no_supervised_metrics(y_pred_1, measures_1)
+    # if measures_1['supervised']:
+    #     print_supervised_metrics(y_pred_1, measures_1)
+    # else:
+    #     print_no_supervised_metrics(y_pred_1, measures_1)
 
-    if y_pred_2:
-        if measures_2['supervised']:
-            print_supervised_metrics(y_pred_2, measures_2)
-        else:
-            print_no_supervised_metrics(y_pred_2, measures_2)
+    # if y_pred_2:
+    #     if measures_2['supervised']:
+    #         print_supervised_metrics(y_pred_2, measures_2)
+    #     else:
+    #         print_no_supervised_metrics(y_pred_2, measures_2)
 
-    print()
+    # print()
 
 
 def print_results_with_info(names: list, y_real: list, y_pred_1: list, measures_1: dict, y_pred_2: list | None = None, measures_2: dict | None = None):
@@ -187,15 +189,15 @@ def print_results_with_info(names: list, y_real: list, y_pred_1: list, measures_
         print(
             f'Grado de Precision al Aplicar {n_2}: {(c_2/len(y_real))*100}%.\n')
 
-    if measures_1['supervised']:
-        print_supervised_metrics(y_pred_1, measures_1)
-    else:
-        print_no_supervised_metrics(y_pred_1, measures_1)
+    # if measures_1['supervised']:
+    #     print_supervised_metrics(y_pred_1, measures_1)
+    # else:
+    #     print_no_supervised_metrics(y_pred_1, measures_1)
 
-    if y_pred_2:
-        if measures_2['supervised']:
-            print_supervised_metrics(y_pred_2, measures_2)
-        else:
-            print_no_supervised_metrics(y_pred_2, measures_2)
+    # if y_pred_2:
+    #     if measures_2['supervised']:
+    #         print_supervised_metrics(y_pred_2, measures_2)
+    #     else:
+    #         print_no_supervised_metrics(y_pred_2, measures_2)
 
     print()
