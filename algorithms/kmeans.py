@@ -44,7 +44,7 @@ def kmeans(csv_name: str, sample_x: list[list] | None = None, writer: int = 1):
     y_pred = kmeans.fit_predict(X)
 
     # Getting the clousters
-    if(sample_x):
+    if sample_x:
         # Determine the totals of cluster and writer documents
         clusters_ = [0]*cluster_count
         cluster_writer = [0]*cluster_count
@@ -59,13 +59,6 @@ def kmeans(csv_name: str, sample_x: list[list] | None = None, writer: int = 1):
         x_sample = sample_x.iloc[:, 2:].values
         y_sample = (sample_x.iloc[:, 1].values).tolist()
         y_sample = [int(l) for l in y_sample]
-
-        # all_v = np.concatenate((x, x_sample))
-        # v = len(all_v)-len(x_sample)
-
-        # sample_transf = scaler.fit_transform(all_v).tolist()
-        # sample_transf = sample_transf[v:]
-        # y_predict = kmeans.predict(sample_transf)
 
         y_predict=[]
         for i in range(len(y_sample)):
@@ -117,3 +110,69 @@ def kmeans(csv_name: str, sample_x: list[list] | None = None, writer: int = 1):
     results['v_measure'] = vmeasure
 
     return y, y_pred, results, cluster_count
+
+
+def kmeans_test(csv_name: str, sample_x: list[list]):
+    '''
+    Unsupervised Learning
+    Clustering using Kmeans algorith
+    Based on closest clouster elements
+    '''
+
+    dataset = pd.read_csv(f'{csv_name}')
+    x = dataset.iloc[:, 2:].values
+    y = dataset.iloc[:, 1].values.tolist()
+    y = [int(l) for l in y]
+
+    sample_x = pd.DataFrame(sample_x)
+    x_sample = sample_x.iloc[:, 2:].values
+    y_sample = (sample_x.iloc[:, 1].values).tolist()
+    y_sample = [int(l) for l in y_sample]
+
+    X_real=np.concatenate((x,x_sample))
+    y_real=y+y_sample
+    
+    scaler = StandardScaler()
+    X = scaler.fit_transform(X_real)
+    
+    
+    kmeans_start = {
+        "init": "random",
+        "n_init": 10,
+        "max_iter": 300,
+        "random_state": 42,
+    }
+
+    # Selecting the best clousters count
+    sse = []
+    for k in range(1, 11):
+        kmeans = KMeans(n_clusters=k, **kmeans_start)
+        kmeans.fit(X)
+        # Sum of squared distances of samples to their closest cluster center, weighted by the sample weights
+        sse.append(kmeans.inertia_)
+
+    kl = KneeLocator(range(1, 11), sse, curve="convex", direction="decreasing")
+    cluster_count = kl.elbow
+
+    # Fitting K-Means to the dataset
+    kmeans = KMeans(n_clusters=cluster_count,
+                    init='k-means++', random_state=42)
+    y_pred = kmeans.fit_predict(X)
+
+    silhouette = silhouette_score(X, y_pred).round(2)
+
+    ari = adjusted_rand_score(y_real, y_pred)
+    homogenity = homogeneity_score(y_real, y_pred)
+    completness = completeness_score(y_real,y_pred)
+    vmeasure = v_measure_score(y_real, y_pred)
+
+    results = dict()
+    results['name'] = "KMEANS"
+    results['supervised'] = False
+    results['score'] = silhouette
+    results['ari'] = ari
+    results['homogenity'] = homogenity
+    results['completness'] = completness
+    results['v_measure'] = vmeasure
+
+    return y_real, y_pred, results, cluster_count
