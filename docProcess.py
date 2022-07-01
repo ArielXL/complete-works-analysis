@@ -3,10 +3,6 @@ import csv
 from datetime import datetime
 from dataVector.docVector import DocumentVector
 
-
-
-
-
 def building_vectors(data_dir: str, csv_name: str = 'vector/set.csv', my_writer: str = 1):
     ''' 
         Converting all data information into a vector
