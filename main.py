@@ -1,18 +1,37 @@
 from utils import *
-from supervisedLearning import using_input as slui
-from noSupervisedLearning import using_input as nslui
-
-from supervisedLearning import using_training_data as slutd
-from noSupervisedLearning import using_training_data as nslutd
+from algorithms.naivebayes import naive_bayes
+from algorithms.kmeans import kmeans
 
 '''
     Console Work
 '''
 
+def data_testing(csv_name: str = 'vector/set.csv'):
+
+    index = csv_lines_count(csv_name)-1
+
+    index, names1, vector1 = build_vectors_no_append(
+        'testData/marti', 1, index)
+    _, names2, vector2 = build_vectors_no_append(
+        'testData/otros', 2, index)
+    vectors = vector1+vector2
+    names = names1+names2
+
+    return vectors,names
+
+def data_input(rute:str,csv_name: str = 'vector/set.csv'):
+    
+    index= csv_lines_count(csv_name)-1
+
+    index, names, vectors = build_vectors_no_append(
+        rute, 2, index)
+
+    return vectors,names   
+
 
 def main():
     print('\nProyecto Final de Inteligencia Artificial.')
-    print('Integrantes:\n  Thalia Blanco Figueras C512\n  Ariel Plasencia Diaz C512\n  Eziel Ramos Piñon C512\n')
+    print('Integrantes:\n  Thalia Blanco Figueras C512.\n  Ariel Plasencia Diaz C512.\n  Eziel Ramos Piñon C512.\n')
 
     while True:
         while True:
@@ -34,19 +53,21 @@ def main():
                 break
 
         if data == 1:
+
+            vectors,names=data_testing()
+            
             if alg == 1:
-                names, y_real, y_pred, measures = slutd()
+                y_real, y_pred, measures=naive_bayes(sample_x=vectors)
                 print_results_with_info(names, y_real, y_pred, measures)
 
             elif alg == 2:
-                names, y_real, y_pred, measures = nslutd()
+                y_real, y_pred, measures=kmeans(sample_x=vectors)
                 print_results_with_info(names, y_real, y_pred, measures)
 
             else:
-                names1, y_real, y_pred1, measures1 = slutd()
-                _, _, y_pred2, measures2 = nslutd()
-                print_results_with_info(
-                    names1, y_real, y_pred1, measures1, y_pred2, measures2)
+                y_real, y_pred1, measures1=naive_bayes(sample_x=vectors)
+                _, y_pred2, measures2=kmeans(sample_x=vectors)
+                print_results_with_info(names, y_real, y_pred1, measures1, y_pred2, measures2)
 
         else:
             while True:
@@ -55,17 +76,19 @@ def main():
                     print()
                     break
 
+            vectors,names=data_input(rute=rute)
+
             if alg == 1:
-                names,_,y_pred, measures = slui(rute)
+                _, y_pred, measures=naive_bayes(sample_x=vectors)
                 print_result_with_input(names,y_pred, measures)
 
             elif alg == 2:
-                names,_,y_pred, measures = nslui(rute)
+                _, y_pred, measures=kmeans(sample_x=vectors)
                 print_result_with_input(names,y_pred, measures)
 
             else:
-                names,_,y_pred, measures = slui(rute)
-                names,_,y_pred, measures = nslui(rute)
+                _, y_pred1, measures1=naive_bayes(sample_x=vectors)
+                _, y_pred2, measures2=kmeans(sample_x=vectors)
                 print_result_with_input(names,y_pred1, measures1, y_pred2, measures2)
 
 
